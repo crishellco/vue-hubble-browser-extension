@@ -1,12 +1,10 @@
 {
   "name": "Vue Hubble",
   "version": "0.1.0",
-  "description": "A browser extension that allows you to select GitHub PR templates",
+  "description": "A browser extension to enhance the developer experience when using Vue Hubble",
   "permissions": [
     "activeTab",
-    "identity",
-    "tabs",
-    "storage"
+    "tabs"
   ],
   "browser_action": {
     "default_title": "Vue Hubble",
