@@ -1,4 +1,4 @@
-## Github PR Template Picker
+## The Vue Hubble Browser Extension
 
 **Install dependencies & build**
 
