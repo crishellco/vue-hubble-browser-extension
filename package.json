@@ -1,0 +1,45 @@
+{
+  "name": "@crishellco/vue-hubble-browser-extension",
+  "version": "0.1.0",
+  "author": "Chris Mitchell (@crishellco)",
+  "description": "The Vue Hubble browser extension",
+  "scripts": {
+    "build": "rollup -c && yarn zip",
+    "lint": "eslint --ext .js,.svelte src/",
+    "lint:fix": "eslint --ext .js,.svelte src/ --fix",
+    "zip": "zip -r vue-hubble-browser-extension.zip dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crishellco/vue-hubble-browser-extension.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crishellco/vue-hubble-browser-extension/issues"
+  },
+  "homepage": "https://crishellco.github.io/vue-hubble-browser-extension/",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.4",
+    "eslint": "^6.8.0",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "postcss": "^8.3.6",
+    "prettier": "^2.0.1",
+    "prettier-plugin-svelte": "^0.7.0",
+    "rollup": "^1.23.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-svelte": "^5.1.0",
+    "rollup-plugin-tailwind": "^1.0.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "svelte": "^3.12.1",
+    "tailwindcss": "^2.2.9"
+  },
+  "dependencies": {
+    "svelte-preprocess": "^4.8.0"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Vue Hubble",
+  "version": "0.1.0",
+  "description": "A browser extension that allows you to select GitHub PR templates",
+  "permissions": [
+    "activeTab",
+    "identity",
+    "tabs",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Vue Hubble",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/key16.png",
+      "32": "images/key32.png",
+      "128": "images/key128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "images/key16.png",
+    "32": "images/key32.png",
+    "128": "images/key128.png"
+  },
+  "manifest_version": 2
+}
