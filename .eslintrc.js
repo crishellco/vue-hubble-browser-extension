@@ -11,16 +11,20 @@ module.exports = {
     ecmaVersion: 2019,
     sourceType: 'module',
   },
-  plugins: ['svelte3'],
-  extends: ['eslint:recommended'],
   overrides: [
     {
-      files: ['**/*.svelte'],
-      processor: 'svelte3/svelte3',
+        files: ['*.svelte'],
+        plugins: ['svelte3'],
+        processor: 'svelte3/svelte3',
+        extends: ['eslint:recommended'],
     },
+    {
+        files: ['*.js'],
+        plugins: ['prettier'],
+        extends: ['eslint:recommended', 'plugin:prettier/recommended'],
+    }
   ],
-  //   rules: {
-  //     'prettier/prettier': 'error',
-  //     'svelte3/lint-template': 2,
-  //   },
+  rules: {
+  },
+  ignorePatterns: ['node_modules']
 }
