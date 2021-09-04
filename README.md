@@ -14,6 +14,6 @@ yarn && yarn build
 
 **Usage**
 
-When browsing a Vue app using [Vue Hubble](https://crishellco.github.io/vue-hubble/) v3.2.0 or greater, click the icon to see all options and toggle certain options.
+When browsing a Vue app using [Vue Hubble v3.3.0](https://github.com/crishellco/vue-hubble/releases/tag/v3.3.0) or greater, click the icon to see all options and toggle certain options.
 
 ![Popup](popup.png)
