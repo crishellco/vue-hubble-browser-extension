@@ -21,6 +21,33 @@ function toggle(key) {
   script.remove();
 }
 
+function fetchSelectors() {
+  const fn = () => {
+    var selectors = [...document.querySelectorAll('[vue-hubble]')].map(
+      (el) => ({
+        selector: el.getAttribute('data-vue-hubble-selector'),
+        tagName: el.tagName,
+      })
+    );
+
+    document.dispatchEvent(
+      new CustomEvent('get_selectors_from_dom', {
+        detail: {
+          selectors,
+        },
+      })
+    );
+  };
+
+  const script = document.createElement('script');
+  script.text = `
+    (${fn.toString()})();
+  `;
+  document.documentElement.appendChild(script);
+
+  // script.remove();
+}
+
 function fetchConfig() {
   promise = new Promise((resolve) =>
     setTimeout(resolve, constants.minFetchDuration)
@@ -47,6 +74,13 @@ function fetchConfig() {
 }
 
 document.addEventListener(
+  'get_selectors_from_dom',
+  function ({ detail: { selectors } }) {
+    postMessage({ type: 'selectors', value: selectors });
+  }
+);
+
+document.addEventListener(
   events.getConfigFromDom,
   function ({ detail: { options } }) {
     promise.then(() => postMessage({ type: events.config, value: options }));
@@ -61,6 +95,10 @@ window.onload = () => {
 
     if (type === events.getConfig) {
       fetchConfig();
+    }
+
+    if (type === 'get_selectors') {
+      fetchSelectors();
     }
   });
 };

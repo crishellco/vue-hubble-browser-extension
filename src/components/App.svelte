@@ -13,11 +13,18 @@
 
 <script>
   import events from '../events';
-  import { AllPluginOptions, Loader, Toggles, ZeroState } from './';
+  import {
+    AllPluginOptions,
+    AllRenderedSelectors,
+    Loader,
+    Toggles,
+    ZeroState,
+  } from './';
 
   let options = {};
   let loading = true;
   let reloading = false;
+  let selectors = [];
 
   $: allOptions = JSON.stringify(options, null, 2);
 
@@ -28,6 +35,10 @@
       loading = false;
       reloading = false;
       options = value || {};
+    }
+
+    if (type === 'selectors') {
+      selectors = value;
     }
   });
 
@@ -57,6 +68,7 @@
   function fetch() {
     reloading = true;
     sendMsgToActiveTab({ type: events.getConfig });
+    sendMsgToActiveTab({ type: 'get_selectors' });
   }
 
   fetch();
@@ -74,6 +86,8 @@
     />
 
     <AllPluginOptions {allOptions} {reloading} on:fetch={fetch} />
+
+    <!-- <AllRenderedSelectors {selectors} /> -->
   {:else}
     <ZeroState />
   {/if}
