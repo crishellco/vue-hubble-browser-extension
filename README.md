@@ -14,6 +14,6 @@ yarn && yarn build
 
 **Usage**
 
-When browsing a Vue app using [Vue Hubble](https://crishellco.github.io/vue-hubble/) v3.2.0 or greater, click the icon to see all options and toggle Selector Picker.
+When browsing a Vue app using [Vue Hubble](https://crishellco.github.io/vue-hubble/) v3.2.0 or greater, click the icon to see all options and toggle certain options.
 
 ![Popup](popup.png)

@@ -1,11 +1,22 @@
 module.exports = {
-  purge: [],
+  purge: [
+    './src/**/*.svelte',
+    // may also want to include HTML files
+    './src/**/*.html',
+  ],
+  mode: 'jit',
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      minHeight: {
+        popup: '22.75rem',
+      },
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+      transform: ['hover'],
+    },
   },
   plugins: [],
-}
+};

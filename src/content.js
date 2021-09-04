@@ -1,47 +1,62 @@
+import constants from './constants';
 import events from './events';
+
+let promise;
 
 function postMessage(message) {
   chrome.runtime.sendMessage(message);
 }
 
-function toggleSelectorPicker() {
-  const fn = () => {
-    window.$hubble.options.enableSelectorPicker =
-      !window.$hubble.options.enableSelectorPicker;
+function toggle(key) {
+  const fn = (optionKey) => {
+    window.$hubble.options[optionKey] = !window.$hubble.options[optionKey];
   };
 
   const script = document.createElement('script');
-  script.text = `(${fn.toString()})();`;
+  script.text = `
+    (${fn.toString()})('${key}');
+  `;
   document.documentElement.appendChild(script);
 
-  fetchConfig();
+  script.remove();
 }
 
 function fetchConfig() {
-  const fn = () => {
+  promise = new Promise((resolve) =>
+    setTimeout(resolve, constants.minFetchDuration)
+  );
+
+  const fn = (getConfigFromDom) => {
     document.dispatchEvent(
-      new CustomEvent('vue_hubble_get_config', {
-        detail: (window.$hubble || {}).options,
+      new CustomEvent(getConfigFromDom, {
+        detail: {
+          options: (window.$hubble || {}).options,
+        },
       })
     );
   };
 
   const script = document.createElement('script');
-  script.text = `(${fn.toString()})();`;
+
+  script.text = `
+    (${fn.toString()})('${events.getConfigFromDom}');
+  `;
   document.documentElement.appendChild(script);
+
+  script.remove();
 }
 
 document.addEventListener(
-  'vue_hubble_get_config',
-  function ({ detail: options }) {
-    postMessage({ type: events.config, value: options });
+  events.getConfigFromDom,
+  function ({ detail: { options } }) {
+    promise.then(() => postMessage({ type: events.config, value: options }));
   }
 );
 
 window.onload = () => {
-  chrome.runtime.onMessage.addListener(({ type }) => {
-    if (type === events.toggleSelectorPicker) {
-      toggleSelectorPicker();
+  chrome.runtime.onMessage.addListener(({ type, key }) => {
+    if (type === events.toggle) {
+      toggle(key);
     }
 
     if (type === events.getConfig) {

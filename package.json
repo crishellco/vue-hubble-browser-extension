@@ -5,8 +5,9 @@
   "description": "The Vue Hubble browser extension",
   "scripts": {
     "build": "rollup -c && yarn zip",
-    "lint": "eslint --ext .js,.svelte ./src",
-    "lint:fix": "eslint --ext .js,.svelte ./src --fix",
+    "watch": "rollup -c -w",
+    "lint": "eslint --ext .js,.svelte --ignore-path .gitignore .",
+    "lint:fix": "yarn lint --fix",
     "zip": "zip -r vue-hubble-browser-extension.zip dist"
   },
   "repository": {
