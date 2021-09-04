@@ -14,6 +14,6 @@ yarn && yarn build
 
 **Usage**
 
-When browsing a Vue app using Vue Hubble v3.2.0 or greater, click the icon to change settings.
+When browsing a Vue app using [Vue Hubble](https://crishellco.github.io/vue-hubble/) v3.2.0 or greater, click the icon to change settings.
 
 ![Popup](popup.png)
