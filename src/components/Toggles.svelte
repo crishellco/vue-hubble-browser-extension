@@ -17,6 +17,10 @@
   function handleDeepNamespacingChange() {
     dispatch('deepNamespacingChange');
   }
+
+  function handleGroupedSelectorsChange() {
+    dispatch('groupedSelectorsChange');
+  }
 </script>
 
 <div>
@@ -40,6 +44,14 @@
       id="deep-namespacing"
       checked={options.enableDeepNamespacing}
       on:change={handleDeepNamespacingChange}
+    />
+  </div>
+  <div class="mt-4">
+    <Toggle
+      label="Grouped Selectors Enabled"
+      id="grouped-selector"
+      checked={options.enableGroupedSelectors}
+      on:change={handleGroupedSelectorsChange}
     />
   </div>
 </div>

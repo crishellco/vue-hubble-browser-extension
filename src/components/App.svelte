@@ -49,6 +49,10 @@
     toggle('enableDeepNamespacing');
   }
 
+  function handleGroupedSelectorsChange() {
+    toggle('enableGroupedSelectors');
+  }
+
   function toggle(key) {
     options[key] = !options[key];
     sendMsgToActiveTab({ type: events.toggle, key });
@@ -71,6 +75,7 @@
       on:commentsChange={handleCommentsChange}
       on:selectorPickerChange={handleSelectorPickerChange}
       on:deepNamespacingChange={handleDeepNamespacingChange}
+      on:groupedSelectorsChange={handleGroupedSelectorsChange}
     />
 
     <AllPluginOptions {allOptions} {reloading} on:fetch={fetch} />
