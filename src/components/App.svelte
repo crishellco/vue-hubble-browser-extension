@@ -14,10 +14,10 @@
 <script>
   import events from '../events';
   import { AllPluginOptions, Loader, Toggles, ZeroState } from './';
+  import EnvironmentInput from './EnvironmentInput.svelte';
 
   let options = {};
   let loading = true;
-  let reloading = false;
 
   $: allOptions = JSON.stringify(options, null, 2);
 
@@ -26,7 +26,6 @@
   chrome.runtime.onMessage.addListener(({ type, value }) => {
     if (type === events.config) {
       loading = false;
-      reloading = false;
       options = value || {};
     }
   });
@@ -53,14 +52,26 @@
     toggle('enableGroupedSelectors');
   }
 
+  function handleEnvironmentChange(event) {
+    update('environment', event.detail.environment);
+  }
+
   function toggle(key) {
     options[key] = !options[key];
     sendMsgToActiveTab({ type: events.toggle, key });
   }
 
+  function update(key, value) {
+    options[key] = value;
+    sendMsgToActiveTab({ type: events.update, key, value });
+  }
+
   function fetch() {
-    reloading = true;
     sendMsgToActiveTab({ type: events.getConfig });
+  }
+
+  function reset() {
+    sendMsgToActiveTab({ type: events.reset });
   }
 
   fetch();
@@ -78,7 +89,9 @@
       on:groupedSelectorsChange={handleGroupedSelectorsChange}
     />
 
-    <AllPluginOptions {allOptions} {reloading} on:fetch={fetch} />
+    <EnvironmentInput {options} on:change={handleEnvironmentChange} />
+
+    <AllPluginOptions {allOptions} on:reset={reset} />
   {:else}
     <ZeroState />
   {/if}

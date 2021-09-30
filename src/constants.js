@@ -1,3 +1,3 @@
 export default {
-  minFetchDuration: 200,
+  minFetchDuration: 500,
 };

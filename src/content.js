@@ -21,10 +21,44 @@ function toggle(key) {
   script.remove();
 }
 
-function fetchConfig() {
-  promise = new Promise((resolve) =>
-    setTimeout(resolve, constants.minFetchDuration)
-  );
+function update(key, value) {
+  const fn = (optionKey, newValue) => {
+    window.$hubble.options[optionKey] = newValue;
+  };
+
+  const script = document.createElement('script');
+  script.text = `
+    (${fn.toString()})('${key}', ${JSON.stringify(value)});
+  `;
+  document.documentElement.appendChild(script);
+
+  script.remove();
+}
+
+function reset() {
+  const fn = () => {
+    window.$hubble.resetOptions();
+  };
+
+  const script = document.createElement('script');
+  script.text = `
+    (${fn.toString()})();
+  `;
+  document.documentElement.appendChild(script);
+
+  script.remove();
+
+  fetchConfig(false);
+}
+
+function fetchConfig(withMinDuration = true) {
+  if (withMinDuration) {
+    promise = new Promise((resolve) =>
+      setTimeout(resolve, constants.minFetchDuration)
+    );
+  } else {
+    promise = Promise.resolve();
+  }
 
   const fn = (getConfigFromDom) => {
     document.dispatchEvent(
@@ -54,13 +88,21 @@ document.addEventListener(
 );
 
 window.onload = () => {
-  chrome.runtime.onMessage.addListener(({ type, key }) => {
+  chrome.runtime.onMessage.addListener(({ type, key, value }) => {
     if (type === events.toggle) {
       toggle(key);
     }
 
+    if (type === events.update) {
+      update(key, value);
+    }
+
     if (type === events.getConfig) {
       fetchConfig();
+    }
+
+    if (type === events.reset) {
+      reset();
     }
   });
 };

@@ -1,11 +1,11 @@
 {
   "name": "@crishellco/vue-hubble-browser-extension",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Chris Mitchell (@crishellco)",
   "description": "The Vue Hubble browser extension",
   "scripts": {
     "build": "rollup -c && yarn zip",
-    "watch": "rollup -c -w",
+    "watch": "TAILWIND_MODE=watch rollup -c -w",
     "lint": "eslint --ext .js,.svelte --ignore-path .gitignore .",
     "lint:fix": "yarn lint --fix",
     "zip": "zip -r vue-hubble-browser-extension.zip dist"

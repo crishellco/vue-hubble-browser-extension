@@ -2,12 +2,11 @@
   import { createEventDispatcher } from 'svelte';
 
   export let allOptions = {};
-  export let reloading = false;
 
   const dispatch = createEventDispatcher();
 
-  const fetch = () => {
-    dispatch('fetch');
+  const reset = () => {
+    dispatch('reset');
   };
 </script>
 
@@ -15,23 +14,23 @@
   <div class="flex justify-between items-center mb-4">
     <div class="text-base font-semibold text-gray-100">All Plugin Options</div>
     <div
-      class:animate-spin={reloading}
       class="text-gray-500 hover:text-gray-400 cursor-pointer rounded-full p-1.5 bg-gray-700 hover:bg-gray-600 "
-      on:click={fetch}
-      title="Refetch Options"
+      on:click={reset}
+      title="Reset Options"
     >
       <svg
         aria-hidden="true"
         focusable="false"
         data-prefix="fas"
-        data-icon="redo-alt"
-        class="h-3"
+        data-icon="history"
         role="img"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"
+        class="h-3"
         ><path
           fill="currentColor"
-          d="M256.455 8c66.269.119 126.437 26.233 170.859 68.685l35.715-35.715C478.149 25.851 504 36.559 504 57.941V192c0 13.255-10.745 24-24 24H345.941c-21.382 0-32.09-25.851-16.971-40.971l41.75-41.75c-30.864-28.899-70.801-44.907-113.23-45.273-92.398-.798-170.283 73.977-169.484 169.442C88.764 348.009 162.184 424 256 424c41.127 0 79.997-14.678 110.629-41.556 4.743-4.161 11.906-3.908 16.368.553l39.662 39.662c4.872 4.872 4.631 12.815-.482 17.433C378.202 479.813 319.926 504 256 504 119.034 504 8.001 392.967 8 256.002 7.999 119.193 119.646 7.755 256.455 8z"
+          d="M504 255.531c.253 136.64-111.18 248.372-247.82 248.468-59.015.042-113.223-20.53-155.822-54.911-11.077-8.94-11.905-25.541-1.839-35.607l11.267-11.267c8.609-8.609 22.353-9.551 31.891-1.984C173.062 425.135 212.781 440 256 440c101.705 0 184-82.311 184-184 0-101.705-82.311-184-184-184-48.814 0-93.149 18.969-126.068 49.932l50.754 50.754c10.08 10.08 2.941 27.314-11.313 27.314H24c-8.837 0-16-7.163-16-16V38.627c0-14.254 17.234-21.393 27.314-11.314l49.372 49.372C129.209 34.136 189.552 8 256 8c136.81 0 247.747 110.78 248 247.531zm-180.912 78.784l9.823-12.63c8.138-10.463 6.253-25.542-4.21-33.679L288 256.349V152c0-13.255-10.745-24-24-24h-16c-13.255 0-24 10.745-24 24v135.651l65.409 50.874c10.463 8.137 25.541 6.253 33.679-4.21z"
+          class=""
         /></svg
       >
     </div>
