@@ -51,6 +51,13 @@ function reset() {
   fetchConfig(false);
 }
 
+document.addEventListener(
+  events.checkForHubble,
+  function ({ detail: { hubbleDetected } }) {
+    postMessage({ type: events.checkForHubble, value: hubbleDetected });
+  }
+);
+
 function fetchConfig(withMinDuration = true) {
   if (withMinDuration) {
     promise = new Promise((resolve) =>

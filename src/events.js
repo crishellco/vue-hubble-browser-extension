@@ -5,4 +5,5 @@ export default {
   toggle: 'toggle',
   update: 'update',
   reset: 'reset',
+  checkForHubble: 'checkForHubble',
 };

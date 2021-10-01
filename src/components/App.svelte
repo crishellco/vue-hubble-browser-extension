@@ -80,7 +80,7 @@
 <div class="p-4 flex flex-col bg-gray-800 min-h-popup" style="width: 20rem">
   {#if loading}
     <Loader />
-  {:else if hasOptions}
+  {:else}
     <Toggles
       {options}
       on:commentsChange={handleCommentsChange}
@@ -92,7 +92,5 @@
     <EnvironmentInput {options} on:change={handleEnvironmentChange} />
 
     <AllPluginOptions {allOptions} on:reset={reset} />
-  {:else}
-    <ZeroState />
   {/if}
 </div>

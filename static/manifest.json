@@ -2,7 +2,11 @@
   "name": "Vue Hubble",
   "version": "0.3.0",
   "description": "A browser extension to enhance the developer experience when using Vue Hubble",
-  "permissions": [],
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs"
+  ],
   "browser_action": {
     "default_title": "Vue Hubble",
     "default_popup": "popup.html",
@@ -27,7 +31,7 @@
     "scripts": [
       "background.js"
     ],
-    "persistent": true
+    "persistent": false
   },
   "icons": {
     "16": "images/key16.png",
